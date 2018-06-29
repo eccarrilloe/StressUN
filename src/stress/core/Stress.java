@@ -28,8 +28,8 @@ public class Stress {
     }
 
     public Stress(Scene scene, String configFile) throws InvalidSceneException {
-        this.scene = scene;
         pApplet = scene.pApplet();
+        this.scene = scene;
 
         if (!(pApplet.g instanceof PGraphics3D)) {
             throw new InvalidSceneException("This is not a 3D Scene");
@@ -52,11 +52,10 @@ public class Stress {
     }
 
     public void pre() {
-        style.pre(); scene.beginScreenDrawing(); pApplet.text("src/stress/core/Stress\nPara que todo se pinte bien, lo primero que hay que pintar es el background", 300, 300); scene.endScreenDrawing();
+        style.pre();
     }
 
     public void draw() {
-        scene.drawAxes(); scene.beginScreenDrawing(); pApplet.text("src/stress/core/Stress\nQuitar esto de aqui !", 400, 400); scene.endScreenDrawing();
         style.draw();
 
 //        if (status == Status.COMMANDLINE) commandLine.draw();

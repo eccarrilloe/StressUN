@@ -7,8 +7,8 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
-//import stress.constants.KeyShortcuts;
-//import stress.constants.Status;
+import stress.constants.KeyShortcuts;
+import stress.constants.Status;
 
 public class Style {
     private PApplet pApplet;
@@ -17,20 +17,20 @@ public class Style {
 
     protected Stress stress;
 
+    public float background[] = {100f, 100f, 100f};
+
     private Vector screenCoordinates;
 
     private char keyPressed = ' ';
     private long time = System.currentTimeMillis();
-
     private long timeResponse = 2500;
-
-    public float background[] = {100f, 100f, 100f};
 
     private String message = "src/stress/core/Style\nEl background debe poder ser modificado por el usuario !\n timeResponse debe poder ser modificado por el usuario ";
 
     private Boolean showSelector;
+    private Boolean showGlobalAxes;
+    private Boolean showCoordinates;
 //    private Boolean showLocalAxes;
-//    private Boolean showCoordinates;
 //    private Boolean showTrackedObject;
 //    private Boolean showExtrude;
 //    private Boolean showForces;
@@ -45,8 +45,9 @@ public class Style {
         this.stress = stress;
 
         showSelector = false;
+        showGlobalAxes = true;
+        showCoordinates = true;
 //        showLocalAxes = false;
-//        showCoordinates = true;
 //        showTrackedObject = false;
 //        showExtrude = false;
 //        showForces = false;
@@ -60,64 +61,14 @@ public class Style {
 
     public void draw() {
         scene.beginScreenDrawing(); pApplet.text(message, 350, 350); scene.endScreenDrawing();
-//        PApplet pApplet = stress.pApplet;
-//        System.out.println("El background debe ser modificable por el usuario ?");
 
         if (showSelector) drawSelector();
-
-//        if (showLocalAxes) scene.drawAxes();
-//
-//        if (showCoordinates) {
-//            Vector mouseCoordinates = null;
-//
-//            if (scene.trackedFrame() == null) {
-//                mouseCoordinates = scene.location(new Vector(pApplet.mouseX, pApplet.mouseY));
-//            } else if (!scene.trackedFrame().getClass().getName().equals("stress.primitives.Axis")) {
-//                mouseCoordinates = scene.trackedFrame().position();
-//            }
-//
-//            String coordinates = ")";
-//            float offsetX = 5; // System.out.println("No hay una forma de leer 30 ó de algún lugar ?");
-//            float offsetY = stress.status == Status.COMMANDLINE ? 30 : 5;
-//
-//            scene.beginScreenDrawing();
-//            pApplet.pushStyle();
-//            pApplet.textSize(16);
-//            pApplet.textAlign(pApplet.RIGHT, pApplet.BOTTOM);
-//
-//            pApplet.fill(0);
-//            pApplet.text(coordinates, pApplet.width - offsetX, pApplet.height - offsetY);
-//
-//            pApplet.fill(0, 0, 255);
-//            pApplet.text(pApplet.nf(mouseCoordinates.z(), 0, 3), pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
-//            coordinates = pApplet.nf(mouseCoordinates.z(), 0, 3) + coordinates;
-//
-//            pApplet.fill(0);
-//            pApplet.text(", ", pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
-//            coordinates = ", " + coordinates;
-//
-//            pApplet.fill(0, 255, 0);
-//            pApplet.text(pApplet.nf(mouseCoordinates.y(), 0, 3), pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
-//            coordinates = pApplet.nf(mouseCoordinates.y(), 0, 3) + coordinates;
-//
-//            pApplet.fill(0);
-//            pApplet.text(", ", pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
-//            coordinates = ", " + coordinates;
-//
-//            pApplet.fill(255, 0, 0);
-//            pApplet.text(pApplet.nf(mouseCoordinates.x(), 0, 3), pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
-//            coordinates = pApplet.nf(mouseCoordinates.x(), 0, 3) + coordinates;
-//
-//            pApplet.fill(0);
-//            pApplet.text("(", pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
-//
-//            pApplet.popStyle();
-//            scene.endScreenDrawing();
-//        }
+        if (showGlobalAxes) drawGlobalAxes();
+        if (showCoordinates) drawCoordinates();
     }
 
     private void drawSelector() {
-        scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nEl usuario puede cambiar estos parametros, donde almacenar dicha información ?", 600, 600); scene.endScreenDrawing();
+        scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nEl usuario puede cambiar estos parametros, donde almacenar dicha información\nHace falta implementar el selector ?", 600, 600); scene.endScreenDrawing();
         int colorStroke = 127;
         int colorFill = 127;
         int colorAlpha = 63;
@@ -139,6 +90,60 @@ public class Style {
         scene.endScreenDrawing();
 
         pApplet.popStyle();
+    }
+
+    private void drawGlobalAxes() {
+        scene.beginScreenDrawing(); pApplet.text("Dibujar nuestros propios ejes para que las letras quden bien orientadas", 50, 50); scene.endScreenDrawing();
+        scene.drawAxes();
+    }
+
+    private void drawCoordinates() {
+        Vector mouseCoordinates = null;
+
+        if (scene.trackedFrame() == null) {
+            mouseCoordinates = scene.location(new Vector(pApplet.mouseX, pApplet.mouseY));
+        } else if (!scene.trackedFrame().getClass().getName().equals("stress.primitives.Axis")) {
+            mouseCoordinates = scene.trackedFrame().position();
+        }
+
+        String coordinates = ")";
+        float offsetX = 10;
+        scene.beginScreenDrawing(); pApplet.text("No hay una forma de leer 30 ó de algún lugar ?", 110, 100); scene.endScreenDrawing();
+        float offsetY = stress.status == Status.COMMANDLINE ? 30 : 5;
+
+        scene.beginScreenDrawing();
+        pApplet.pushStyle();
+        pApplet.textSize(16);
+        pApplet.textAlign(pApplet.RIGHT, pApplet.BOTTOM);
+
+        pApplet.fill(0);
+        pApplet.text(coordinates, pApplet.width - offsetX, pApplet.height - offsetY);
+
+        pApplet.fill(0, 0, 255);
+        pApplet.text(pApplet.nf(mouseCoordinates.z(), 0, 3), pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
+        coordinates = pApplet.nf(mouseCoordinates.z(), 0, 3) + coordinates;
+
+        pApplet.fill(0);
+        pApplet.text(", ", pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
+        coordinates = ", " + coordinates;
+
+        pApplet.fill(0, 255, 0);
+        pApplet.text(pApplet.nf(mouseCoordinates.y(), 0, 3), pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
+        coordinates = pApplet.nf(mouseCoordinates.y(), 0, 3) + coordinates;
+
+        pApplet.fill(0);
+        pApplet.text(", ", pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
+        coordinates = ", " + coordinates;
+
+        pApplet.fill(255, 0, 0);
+        pApplet.text(pApplet.nf(mouseCoordinates.x(), 0, 3), pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
+        coordinates = pApplet.nf(mouseCoordinates.x(), 0, 3) + coordinates;
+
+        pApplet.fill(0);
+        pApplet.text("(", pApplet.width - pApplet.textWidth(coordinates) - offsetX, pApplet.height - offsetY);
+
+        pApplet.popStyle();
+        scene.endScreenDrawing();
     }
 
     public void mouseEvent (MouseEvent event) {
@@ -196,45 +201,61 @@ public class Style {
     }
 
     public void keyPressed(KeyEvent event) {
-        if (keyPressed == ' ' && (System.currentTimeMillis() - time) > 100) {
-            time = System.currentTimeMillis();
-            keyPressed = event.getKey();
-            System.out.print(keyPressed);
-            System.out.print(' ');
-            System.out.println(time);
-//        } else if ((System.currentTimeMillis() - time) < timeResponse && event.getKey() != keyPressed) {
-//            System.out.print(event.getKey());
-//            System.out.print(' ');
-//            System.out.println(System.currentTimeMillis() - time);
-//            switch ("" + keyPressed + event.getKey()) {
-//                case KeyShortcuts.LOCAL_AXES:
-//                    setShowLocalAxes(!getShowLocalAxes());
-//                    break;
-//                case KeyShortcuts.GLOBAL_COORDINATES:
-//                    setShowCoordinates(!getShowCoordinates());
-//                    break;
-//            case KeyShortcuts.TRACKEDOBJECT:
-//                setShowTrackedObject(!getShowCoordinates());
-//                break;
-//            case KeyShortcuts.EXTRUDE:
-//                setShowExtrude(!getShowExtrude());
-//                break ;
-//            case KeyShortcuts.FORCES:
-//                setShowForces(!getShowForces());
-//                break;
-//            case KeyShortcuts.HOVEROBJECT:
-//                setShowHoverObject(!getShowHoverObject());
-//                break;
-//            case KeyShortcuts.LEVEL:
-//                setShowLevels(!getShowLevels());
-//                break;
-//            }
-//            keyPressed = ' ';
-        } else if (System.currentTimeMillis() - time >= timeResponse){
-            time = System.currentTimeMillis();
-            keyPressed = ' ';
-            System.out.println("holi");
+        if (event.getAction() == KeyEvent.PRESS) {
+            if (keyPressed == ' ') {
+                time = System.currentTimeMillis();
+                keyPressed = event.getKey();
+            } else if ((System.currentTimeMillis() - time) < timeResponse) {
+                switch ("" + keyPressed + event.getKey()) {
+                    case KeyShortcuts.GLOBAL_AXES:
+                        setShowGlobalAxes(!getShowGlobalAxes());
+                        break;
+                    case KeyShortcuts.COORDINATES:
+                        setShowCoordinates(!getShowCoordinates());
+                        break;
+//                    case KeyShortcuts.LOCAL_AXES:
+//                        setShowLocalAxes(!getShowLocalAxes());
+//                        break;
+//                    case KeyShortcuts.TRACKEDOBJECT:
+//                        setShowTrackedObject(!getShowCoordinates());
+//                        break;
+//                    case KeyShortcuts.EXTRUDE:
+//                        setShowExtrude(!getShowExtrude());
+//                        break ;
+//                    case KeyShortcuts.FORCES:
+//                        setShowForces(!getShowForces());
+//                        break;
+//                    case KeyShortcuts.HOVEROBJECT:
+//                        setShowHoverObject(!getShowHoverObject());
+//                        break;
+//                    case KeyShortcuts.LEVEL:
+//                        setShowLevels(!getShowLevels());
+//                        break;
+                    default:
+                        keyPressed = ' ';
+                        break;
+                }
+            } else {
+                time = System.currentTimeMillis();
+                keyPressed = event.getKey();
+            }
         }
+    }
+
+    public boolean getShowGlobalAxes() {
+        return showGlobalAxes;
+    }
+
+    public void setShowGlobalAxes(Boolean showGlobalAxes) {
+        this.showGlobalAxes = showGlobalAxes;
+    }
+
+    public Boolean getShowCoordinates() {
+        return showCoordinates;
+    }
+
+    public void setShowCoordinates(Boolean showCoordinates) {
+        this.showCoordinates = showCoordinates;
     }
 
 //    public Boolean getShowLocalAxes() {
@@ -243,14 +264,6 @@ public class Style {
 
 //    public void setShowLocalAxes(Boolean showLocalAxes) {
 //        this.showLocalAxes = showLocalAxes;
-//    }
-
-//    public Boolean getShowCoordinates() {
-//        return showCoordinates;
-//    }
-
-//    public void setShowCoordinates(Boolean showCoordinates) {
-//        this.showCoordinates = showCoordinates;
 //    }
 
 //    public Boolean getShowTrackedObject() {
