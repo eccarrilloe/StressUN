@@ -31,7 +31,10 @@ public class BuildingModel extends PApplet {
     }
 
     public void draw() {
-        scene.beginScreenDrawing(); text("src/basics/BuildingModel\nEl usuario debe ser capaz de cambiar el scene.type", 600, 600); scene.endScreenDrawing();
+        scene.beginScreenDrawing(); text("/testing/src/basics/BuildingModel\n" +
+                "El usuario debe ser capaz de modificar scene.type\n" +
+                "Averiguar como afecta el fieldOfView\n" +
+                "Poner un init en el stress ?", 600, 600); scene.endScreenDrawing();
     }
 
     public static void main(String args[]) {

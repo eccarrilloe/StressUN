@@ -9,7 +9,6 @@ import processing.event.MouseEvent;
 import processing.opengl.PGraphics3D;
 
 import stress.constants.Status;
-
 import stress.exceptions.InvalidSceneException;
 
 public class Stress {
@@ -28,7 +27,7 @@ public class Stress {
     }
 
     public Stress(Scene scene, String configFile) throws InvalidSceneException {
-        pApplet = scene.pApplet();
+        this.pApplet = scene.pApplet();
         this.scene = scene;
 
         if (!(pApplet.g instanceof PGraphics3D)) {
@@ -57,7 +56,6 @@ public class Stress {
 
     public void draw() {
         style.draw();
-
 //        if (status == Status.COMMANDLINE) commandLine.draw();
     }
 
