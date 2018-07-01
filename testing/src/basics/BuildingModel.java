@@ -10,10 +10,10 @@ import stress.exceptions.InvalidSceneException;
 
 public class BuildingModel extends PApplet {
     private Scene scene;
-    private Stress stress;
+    private Stress stress; private String message = "Poner un init en el stress ?";
 
     public void settings() {
-        size(1600, 800, P3D);
+        size(1600, 800, P3D); message+= "\nCambiar el tamaño de la ventana !";
     }
 
     public void setup() {
@@ -25,16 +25,13 @@ public class BuildingModel extends PApplet {
         }
 
         scene.setRightHanded();
-        scene.setType(Graph.Type.ORTHOGRAPHIC);
-        scene.setFieldOfView(PApplet.PI / 3);
+        scene.setType(Graph.Type.ORTHOGRAPHIC); message+= "\nEl usuario debe ser capaz de modificar scene.type";
+        scene.setFieldOfView(PApplet.PI / 3); message+= "\nAveriguar como afecta el fieldOfView";
         scene.fitBall();
     }
 
     public void draw() {
-        scene.beginScreenDrawing(); text("/testing/src/basics/BuildingModel\n" +
-                "El usuario debe ser capaz de modificar scene.type\n" +
-                "Averiguar como afecta el fieldOfView\n" +
-                "Poner un init en el stress ?", 600, 600); scene.endScreenDrawing();
+        scene.beginScreenDrawing(); text("/testing/src/basics/BuildingModel\n" + message, 600, 600); scene.endScreenDrawing();
     }
 
     public static void main(String args[]) {

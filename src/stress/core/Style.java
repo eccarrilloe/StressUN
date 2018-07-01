@@ -18,14 +18,11 @@ public class Style {
     protected Stress stress;
 
     public int background;
-
     private Vector screenCoordinates;
-
     private char keyPressed = ' ';
 
     private Boolean showSelector;
     private Boolean showShortcut;
-
     private Boolean showGlobalAxes;
     private Boolean showCoordinates;
 //    private Boolean showLocalAxes;
@@ -35,7 +32,7 @@ public class Style {
 //    private Boolean showHoverObject;
 //    private Boolean showLevels;
 
-    private String message;
+    private String message = "src/stress/core/Style";
 
     public Style(Stress stress) {
         this.pApplet = stress.pApplet;
@@ -44,9 +41,10 @@ public class Style {
 
         this.stress = stress;
 
+        this.background = pApplet.color(100, 100, 100); message+= "\nEl background debe poder ser modificado por el usuario !";
+
         showSelector = false;
         showShortcut = true;
-
         showGlobalAxes = true;
         showCoordinates = true;
 //        showLocalAxes = false;
@@ -58,26 +56,20 @@ public class Style {
     }
 
     public void pre() {
-        pApplet.background(pApplet.color(100, 100, 100));
-        message = "src/stress/core/Style\nEl background debe poder ser modificado por el usuario !";
+        pApplet.background(background);
     }
 
     public void draw() {
-        scene.beginScreenDrawing();
-        pApplet.text(message, 350, 350);
-        scene.endScreenDrawing();
+        scene.beginScreenDrawing(); pApplet.text(message, 350, 350); scene.endScreenDrawing();
 
         if (showSelector) drawSelector();
         if (showShortcut) drawShortcut();
-
         if (showGlobalAxes) drawGlobalAxes();
         if (showCoordinates) drawCoordinates();
     }
 
     private void drawSelector() {
-        scene.beginScreenDrawing();
-        pApplet.text("src/stress/core/Style\nEl usuario puede cambiar estos parametros, donde almacenar dicha información\nHace falta implementar el selector", 600, 600);
-        scene.endScreenDrawing();
+        scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nEl usuario puede cambiar estos parametros, donde almacenar dicha información\nHace falta implementar el selector", 600, 600); scene.endScreenDrawing();
         int colorStroke = 127;
         int colorFill = 127;
         int colorAlpha = 63;
@@ -103,16 +95,12 @@ public class Style {
 
     private void drawShortcut() {
         if (keyPressed != ' ') {
+            scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nEl usuario debe ser capaz de cambiar el valor de esta variable", 86, 56); scene.endScreenDrawing();
+
             pApplet.pushStyle();
 
             pApplet.textSize(16);
-            scene.beginScreenDrawing();
-            pApplet.text("El usuario debe ser capaz de cambiar el valor de esta variable", 86, 56);
-            scene.endScreenDrawing();
             pApplet.fill(0);
-            scene.beginScreenDrawing();
-            pApplet.text("El usuario debe ser capaz de cambiar el valor de esta variable", 86, 56);
-            scene.endScreenDrawing();
 
             scene.beginScreenDrawing();
             pApplet.text(keyPressed, pApplet.mouseX, pApplet.mouseY);
@@ -123,20 +111,16 @@ public class Style {
     }
 
     private void drawGlobalAxes() {
-        scene.beginScreenDrawing();
-        pApplet.text("Dibujar nuestros propios ejes para que las letras quden bien orientadas", 50, 50);
-        scene.endScreenDrawing();
+        scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nDibujar nuestros propios ejes para que las letras quden bien orientadas", 50, 50); scene.endScreenDrawing();
         scene.drawAxes();
     }
 
     private void drawCoordinates() {
         Vector mouseCoordinates = null;
-        scene.beginScreenDrawing();
-        pApplet.text("MIirar como administar esto y la modelación con clics", 542, 234);
-        scene.endScreenDrawing();
-        scene.beginScreenDrawing();
-        pApplet.text("Mirar la implementarción de esta función con calma", 361, 689);
-        scene.endScreenDrawing();
+
+        scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nMirar como administar esto y la modelación con clics", 542, 234); scene.endScreenDrawing();
+        scene.beginScreenDrawing(); pApplet.text("Mirar la implementarción de esta función con calma", 361, 689); scene.endScreenDrawing();
+
         if (scene.trackedFrame() == null) {
             mouseCoordinates = scene.location(new Vector(pApplet.mouseX, pApplet.mouseY));
         } else if (!scene.trackedFrame().getClass().getName().equals("stress.primitives.Axis")) {
@@ -145,9 +129,7 @@ public class Style {
 
         String coordinates = ")";
         float offsetX = 10;
-        scene.beginScreenDrawing();
-        pApplet.text("No hay una forma de leer 30 ó de algún lugar ?", 110, 100);
-        scene.endScreenDrawing();
+        scene.beginScreenDrawing(); pApplet.text("No hay una forma de leer 30 ó de algún lugar ?", 110, 100); scene.endScreenDrawing();
         float offsetY = stress.status == Status.COMMANDLINE ? 30 : 5;
 
         scene.beginScreenDrawing();
@@ -197,9 +179,7 @@ public class Style {
 
             case MouseEvent.PRESS:
                 if (event.getButton() == pApplet.LEFT) { // && event.getCount() == 1
-                    scene.beginScreenDrawing();
-                    pApplet.text("src/stress/core/Style\nProblemas administrando la cantidad de clics", 400, 500);
-                    scene.endScreenDrawing();
+                    scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nProblemas administrando la cantidad de clics", 400, 500); scene.endScreenDrawing();
                     screenCoordinates = new Vector(pApplet.mouseX, pApplet.mouseY);/*
                 if (showAddNode) {
                     this.addNode();
@@ -231,18 +211,14 @@ public class Style {
                     scene.translate();
                 } else if (event.getButton() == pApplet.RIGHT) {
                     scene.rotateCAD(new Vector(0, 0, 1));
-                    scene.beginScreenDrawing();
-                    pApplet.text("src/stress/core/Style\nCon respecto a que punto está rotando ?", 500, 500);
-                    scene.endScreenDrawing();
+                    scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nCon respecto a que punto está rotando ?", 500, 500); scene.endScreenDrawing();
                 }
                 break;
 
             case MouseEvent.WHEEL:
                 // scene.setTrackedFrame(scene.eye());
                 scene.scale(-20 * event.getCount());
-                scene.beginScreenDrawing();
-                pApplet.text("src/stress/core/Style\nHacia donde apuntar el wheel ?\nEl usuario debe ser capaz de modificar la sensibilidad", 550, 550);
-                scene.endScreenDrawing();
+                scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nHacia donde apuntar el wheel ?\nEl usuario debe ser capaz de modificar la sensibilidad", 550, 550); scene.endScreenDrawing();
                 break;
         }
     }
