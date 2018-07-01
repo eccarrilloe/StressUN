@@ -1,4 +1,4 @@
-frames
+StressUN
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 ===========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
 
@@ -6,7 +6,6 @@ frames
 
 - [Description](#user-content-description)
 - [Usage](#user-content-usage)
-- [Installation](#user-content-installation)
 - [Contributors](#user-content-contributors)
 
 ## Description
@@ -15,20 +14,28 @@ frames
 
 ## Usage
 
-
-
-### Stress instantiation
-
-Instantiate your on-screen stress at the [setup()](https://processing.org/reference/setup_.html):
-
-```java
-Stress stress;
-void setup() {
-  this.stress = new Stress(this);
-}
-```
-
 ### Mouse
+#### Dragged
+
+| Event         | Action           |
+|---------------|------------------|
+| Left Button   | Selector objects |
+| Right Button  | Rotate           |
+| Center Button | Pan              |
+
+#### Wheel
+Zoom.
+
+### KeyBoard
+
+There are two modes: CANVAS and COMMANDLINE. The mode COMMANDLINE is activated with the ENTER (or RETURN) key.
+
+In the CANVAS mode, you can modify use the followings shortcuts
+
+| Event | Action                  |
+|-------|-------------------------|
+| xy    | Toggle show coordinates |
+| ga    | Toggle show global axes |
 
 ## Contributors
 
