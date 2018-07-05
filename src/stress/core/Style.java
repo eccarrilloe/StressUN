@@ -121,9 +121,10 @@ public class Style {
         scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nMirar como administar esto y la modelación con clics", 542, 234); scene.endScreenDrawing();
         scene.beginScreenDrawing(); pApplet.text("Mirar la implementarción de esta función con calma", 361, 689); scene.endScreenDrawing();
 
-        if (scene.trackedFrame() == null) {
+        if (scene.trackedFrame() == null ||
+                scene.trackedFrame().getClass().getName().equals("stress.primitives.Axis")) {
             mouseCoordinates = scene.location(new Vector(pApplet.mouseX, pApplet.mouseY));
-        } else if (!scene.trackedFrame().getClass().getName().equals("stress.primitives.Axis")) {
+        } else {// } else if () {
             mouseCoordinates = scene.trackedFrame().position();
         }
 
@@ -217,7 +218,7 @@ public class Style {
 
             case MouseEvent.WHEEL:
                 // scene.setTrackedFrame(scene.eye());
-                scene.scale(-20 * event.getCount());
+                scene.scale(-20 * event.getCount(), scene.eye());
                 scene.beginScreenDrawing(); pApplet.text("src/stress/core/Style\nHacia donde apuntar el wheel ?\nEl usuario debe ser capaz de modificar la sensibilidad", 550, 550); scene.endScreenDrawing();
                 break;
         }

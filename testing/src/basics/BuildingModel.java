@@ -13,7 +13,7 @@ public class BuildingModel extends PApplet {
     private Stress stress; private String message = "Poner un init en el stress ?";
 
     public void settings() {
-        size(1600, 800, P3D); message+= "\nCambiar el tamaño de la ventana !";
+        size(1600, 800, P3D); message+= "\nCambiar el tamaño de la ventana dinamicamente !";
     }
 
     public void setup() {
@@ -25,13 +25,16 @@ public class BuildingModel extends PApplet {
         }
 
         scene.setRightHanded();
-        scene.setType(Graph.Type.ORTHOGRAPHIC); message+= "\nEl usuario debe ser capaz de modificar scene.type";
-        scene.setFieldOfView(PApplet.PI / 3); message+= "\nAveriguar como afecta el fieldOfView";
+        scene.setType(Graph.Type.ORTHOGRAPHIC); message+="\nEl usuario debe ser capaz de modificar scene.type";
+        scene.setFieldOfView(PApplet.PI / 3); message+="\nAveriguar como afecta el fieldOfView";
         scene.fitBall();
+
+        stress.init();
     }
 
     public void draw() {
-        scene.beginScreenDrawing(); text("/testing/src/basics/BuildingModel\n" + message, 600, 600); scene.endScreenDrawing();
+        scene.traverse(); message+="\nmirar esto con calma";
+        scene.cast(); message+="\nmirar esto con calma";
     }
 
     public static void main(String args[]) {

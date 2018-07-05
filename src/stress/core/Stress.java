@@ -1,7 +1,7 @@
 package stress.core;
 
 import frames.processing.Scene;
-//import frames.primitives.Vector;
+import frames.primitives.Vector;
 
 import processing.core.PApplet;
 import processing.event.KeyEvent;
@@ -10,6 +10,7 @@ import processing.opengl.PGraphics3D;
 
 import stress.constants.Status;
 import stress.exceptions.InvalidSceneException;
+import stress.primitives.Axis;
 
 public class Stress {
     public PApplet pApplet;
@@ -47,6 +48,20 @@ public class Stress {
         this.pApplet.registerMethod("draw", this);
         this.pApplet.registerMethod("keyEvent", this);
         this.pApplet.registerMethod("mouseEvent", this);
+    }
+
+    public void init() {
+        int dx = 5;
+        int dy = 5;
+        String[] letters = {"A", "B", "C", "D", "E"};
+        String[] numbers = {"1", "2", "3", "4", "5"};
+
+        for (int i = 0; i < 5; i++) {
+            new Axis(scene, new Vector(i*dx, -5, 0), new Vector(i*dx, 25, 0), letters[i]);
+        }
+        for (int j = 0; j < 5; j++) {
+            new Axis(scene, new Vector(-5, j*dy, 0), new Vector(25, j*dy, 0), numbers[j]);
+        }
     }
 
     public void pre() {
