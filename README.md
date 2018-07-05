@@ -41,6 +41,6 @@ In the CANVAS mode, you can modify use the followings shortcuts
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars2.githubusercontent.com/u/4590365?s=460&v=4" width="100px;"/><br /><sub><b>[Edward  Camilo Carrillo Estupiñan](eccarilloe)</b></sub>](https://github.com/eccarilloe)<br /> | [<img src="https://avatars2.githubusercontent.com/u/6618257?s=460&v=4" width="100px;"/><br /><sub><b>Cristian Danilo Ramirez Vargas</b></sub>](https://github.com/rvcristiand) |
+| [<img src="https://avatars2.githubusercontent.com/u/4590365?s=460&v=4" width="100px;"/><br /><sub><b>eccarilloe</b></sub>](https://github.com/eccarilloe)<br /> | [<img src="https://avatars2.githubusercontent.com/u/6618257?s=460&v=4" width="100px;"/><br /><sub><b>Cristian Danilo Ramirez Vargas</b></sub>](https://github.com/rvcristiand) |
 | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
